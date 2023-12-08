@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";  // useEffect es un hook que se ejecuta cuando el componente esta listo
+import PropTypes from 'prop-types';
 import styled from "@emotion/styled";
 import Error from "./Error";
 import useSelectCoins from "../hooks/useSelectCoins";
@@ -23,7 +24,7 @@ const InputSubmit = styled.input`
   }
 `
 
-const Form = () => {
+const Form = ({setCoins}) => {
 
     const [ crypts, setCrypts] = useState([]); // se usa array destructuring
     const [ error, setError] = useState(false);
@@ -64,6 +65,12 @@ const Form = () => {
             setError(true);
             return;
         }
+
+        setError(false);
+        setCoins({
+            coin,
+            cryptocurrency
+        })
     }
 
   return (
@@ -84,5 +91,9 @@ const Form = () => {
     </>
   )
 }
+
+Form.propTypes = {
+    setCoins: PropTypes.func.isRequired,
+}; 
 
 export default Form
