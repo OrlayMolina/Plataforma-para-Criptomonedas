@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import useSelectCoins from "../hooks/useSelectCoins";
+import { coins } from "../data/Coins";
 
 const InputSubmit = styled.input`
   margin-top: 20px;
@@ -20,12 +22,16 @@ const InputSubmit = styled.input`
 `
 
 const Form = () => {
+
+    const [SelectCoins] = useSelectCoins('Elige tu Moneda', coins);
+
   return (
     <form>
-      <InputSubmit 
-        type="submit" 
-        value="Cotizar"
-      />
+        <SelectCoins /> 
+        <InputSubmit 
+            type="submit" 
+            value="Cotizar"
+        />
     </form>
   )
 }
