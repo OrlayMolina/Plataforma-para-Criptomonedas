@@ -1,3 +1,4 @@
+import { useEffect } from "react";  // useEffect es un hook que se ejecuta cuando el componente esta listo
 import styled from "@emotion/styled";
 import useSelectCoins from "../hooks/useSelectCoins";
 import { coins } from "../data/Coins";
@@ -23,11 +24,29 @@ const InputSubmit = styled.input`
 
 const Form = () => {
 
-    const [SelectCoins] = useSelectCoins('Elige tu Moneda', coins);
+    /* Se usa array destructuring el cual tiene encuenta la coincidencia segun el index no el nombre. 
+       Si fuera object destructuring sí necesitaria el mismo nombre.*/
+    const [ coin, SelectCoins] = useSelectCoins('Elige tu Moneda', coins);
+
+    useEffect(() => {
+        const consultAPI = async () => {
+            const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=20&tsym=USD';
+
+            const response = await fetch(url);
+            
+            console.log(response);
+        }
+
+        consultAPI();
+        
+    }, [])
 
   return (
     <form>
         <SelectCoins /> 
+
+        {coin}
+
         <InputSubmit 
             type="submit" 
             value="Cotizar"

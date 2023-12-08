@@ -49,7 +49,7 @@ const useSelectCoins = (label, options) => {
         </>
     )
 
-    return [SelectCoins]
+    return [ state, SelectCoins ]
 }
 
 export default useSelectCoins
